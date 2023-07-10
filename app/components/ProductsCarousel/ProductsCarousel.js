@@ -11,7 +11,7 @@ const ProductsCarousel = () => {
     borderRadius: '4px',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    fontSize: '6rem',
+    fontSize: '5rem',
     textTransform: 'capitalize',
   };
 

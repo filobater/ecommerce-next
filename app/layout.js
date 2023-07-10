@@ -1,6 +1,8 @@
 import { ReactQueryProvider } from './ReactQueryProvider';
 import './globals.css';
 import { Inter } from 'next/font/google';
+import CategoriesList from './components/layout/CategoriesList/CategoriesList';
+import Navbar from './components/Navbar/Navbar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -14,7 +16,14 @@ export default function RootLayout({ children }) {
   return (
     <ReactQueryProvider>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <Navbar />
+
+          <main className="p-5 pt-4">
+            <CategoriesList />
+            {children}
+          </main>
+        </body>
       </html>
     </ReactQueryProvider>
   );

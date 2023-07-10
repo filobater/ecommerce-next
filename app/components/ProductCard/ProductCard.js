@@ -7,10 +7,10 @@ const ProductCard = ({ product }) => {
       {/* Image & actions */}
       <div className="aspect-square rounded-xl bg-gray-100 relative">
         <Image
-          priority
           src={product.thumbnail}
           alt={product.title}
-          fill
+          width={400}
+          height={500}
           className="aspect-square object-cover rounded-md"
         />
         <div className="opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5">
