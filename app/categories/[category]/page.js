@@ -1,7 +1,7 @@
 'use client';
 import { useProductsCategory } from '@/app/hooks/useProductsCategory';
 
-import ProductsList from '@/app/components/layout/ProductsList/ProductsList';
+import ProductsList from '@/app/layout/ProductsList/ProductsList';
 
 const CategoryPage = ({ params }) => {
   const { data } = useProductsCategory(params.category);

@@ -17,3 +17,9 @@
   border-radius: 0;
   background: #b0b0b0;
 }
+
+/* :where(.css-dev-only-do-not-override-14wwjjs).ant-input-search .ant-input:hover,
+:where(.css-dev-only-do-not-override-14wwjjs).ant-input-search
+  .ant-input:focus {
+  border-color: rgb(191, 191, 191);
+} */

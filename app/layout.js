@@ -1,7 +1,7 @@
 import { ReactQueryProvider } from './ReactQueryProvider';
 import './globals.css';
 import { Inter } from 'next/font/google';
-import CategoriesList from './components/layout/CategoriesList/CategoriesList';
+import CategoriesList from './layout/CategoriesList/CategoriesList';
 import Navbar from './components/Navbar/Navbar';
 
 const inter = Inter({ subsets: ['latin'] });
