@@ -8,7 +8,7 @@ const Navbar = () => {
   const { Search } = Input;
 
   const onSearch = (value) => {
-    console.log(value.toLowerCase());
+    console.log(value);
   };
 
   return (

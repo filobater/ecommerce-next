@@ -4,7 +4,7 @@ import { useProductsCategory } from '@/app/hooks/useProductsCategory';
 import ProductsList from '@/app/layout/ProductsList/ProductsList';
 
 const CategoryPage = ({ params }) => {
-  const { data } = useProductsCategory(params.category);
+  const { data, isLoading } = useProductsCategory(params.category);
 
   const products = data?.data.products;
   return (

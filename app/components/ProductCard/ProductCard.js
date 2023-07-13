@@ -11,8 +11,8 @@ const ProductCard = ({ product }) => {
           <Image
             src={product.thumbnail}
             alt={product.title}
-            width={400}
-            height={500}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="aspect-square object-cover rounded-md"
           />
           <div className="opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5">
