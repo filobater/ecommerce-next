@@ -1,14 +1,21 @@
 'use client';
 
 import Link from 'next/link';
-import React from 'react';
+import { useContext } from 'react';
+import { SearchContext } from '@/app/context/SearchContext';
 import { Input } from 'antd';
-
+import { useRouter } from 'next/navigation';
 const Navbar = () => {
+  const router = useRouter();
+  const { setSearchValue } = useContext(SearchContext);
+
   const { Search } = Input;
 
   const onSearch = (value) => {
-    console.log(value);
+    if (value && value !== '') {
+      setSearchValue(value);
+      router.push('/search');
+    }
   };
 
   return (

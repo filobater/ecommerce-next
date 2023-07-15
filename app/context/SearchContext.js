@@ -1,17 +1,15 @@
-// import { createContext, useState } from 'react';
+'use client';
 
-// export const SearchContext = createContext();
+import { createContext, useState } from 'react';
 
-// export const SearchProvider = ({ children }) => {
-//   const [searchValue, setSearchValue] = useState('');
+export const SearchContext = createContext();
 
-//   const addSearchValue = (value) => {
-//     setSearchValue(value);
-//   };
+export const SearchProvider = ({ children }) => {
+  const [searchValue, setSearchValue] = useState(null);
 
-//   return (
-//     <SearchProvider.Provider value={{ searchValue, addSearchValue }}>
-//       {children}
-//     </SearchProvider.Provider>
-//   );
-// };
+  return (
+    <SearchContext.Provider value={{ searchValue, setSearchValue }}>
+      {children}
+    </SearchContext.Provider>
+  );
+};

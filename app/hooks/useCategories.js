@@ -6,5 +6,5 @@ const getCategories = () => {
 };
 
 export const useCategories = () => {
-  return useQuery(['Categories'], getCategories);
+  return useQuery(['categories'], getCategories);
 };

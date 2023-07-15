@@ -6,5 +6,5 @@ const getProductDetails = (id) => {
 };
 
 export const useProductDetails = (id) => {
-  return useQuery(['ProductDetails', id], () => getProductDetails(id));
+  return useQuery(['productDetails', id], () => getProductDetails(id));
 };

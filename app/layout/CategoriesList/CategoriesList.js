@@ -1,5 +1,4 @@
 'use client';
-
 import Link from 'next/link';
 import { useCategories } from '@/app/hooks/useCategories';
 import Skeleton from 'react-loading-skeleton';
