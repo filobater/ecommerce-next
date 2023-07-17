@@ -3,6 +3,7 @@ import './globals.css';
 import CategoriesList from './layout/CategoriesList/CategoriesList';
 import Navbar from './components/Navbar/Navbar';
 import { SearchProvider } from './context/SearchContext.js';
+import { AuthProvider } from './context/AuthContext';
 
 export const metadata = {
   title: 'Ecommerce',
@@ -15,14 +16,15 @@ export default function RootLayout({ children }) {
     <ReactQueryProvider>
       <html lang="en">
         <body>
-          <SearchProvider>
-            <Navbar />
-
-            <main className="p-6 pt-4">
-              <CategoriesList />
-              {children}
-            </main>
-          </SearchProvider>
+          <AuthProvider>
+            <SearchProvider>
+              <Navbar />
+              <main className="p-6 pt-4">
+                <CategoriesList />
+                {children}
+              </main>
+            </SearchProvider>
+          </AuthProvider>
         </body>
       </html>
     </ReactQueryProvider>
