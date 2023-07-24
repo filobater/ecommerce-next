@@ -1,6 +1,6 @@
 'use client';
 import { useContext } from 'react';
-import { Divider } from 'antd';
+import { Button, Divider, message } from 'antd';
 import { Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import InputPassword from '@/app/components/Inputs/InputPassword';
@@ -18,6 +18,24 @@ import {
 
 const LoginPage = () => {
   const router = useRouter();
+  // message success when he logged in
+  const [messageApi, contextHolder] = message.useMessage();
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Your are logged in',
+      onClose: () => router.push('/'),
+      duration: 0.6,
+    });
+  };
+
+  const errorAuth = () => {
+    messageApi.open({
+      type: 'error',
+      content: error.message,
+      duration: 2,
+    });
+  };
 
   const { AuthUser, user: userContext } = useContext(AuthContext);
 
@@ -53,22 +71,17 @@ const LoginPage = () => {
     handleLogin(userGoogle.user);
   }
 
-  //   if (user || userGoogle) {
-  //     console.log(user || userGoogle);
-  //   }
-
-  //   useEffect(() => {
-  //     if (userContext) {
-  //       router.push('/');
-  //     }
-  //   }, []);
+  if (error) {
+    errorAuth();
+  }
 
   if (userContext) {
-    router.push('/');
+    success();
   }
 
   return (
     <main className="w-full flex gap-4 flex-col-reverse py-16 px-4">
+      {contextHolder}
       <div className="flex-1 flex items-center justify-center h-screen">
         <div className="w-full max-w-lg space-y-8 px-4  text-gray-600 sm:px-0">
           <div>
@@ -105,7 +118,7 @@ const LoginPage = () => {
                   className="text-red-500 !m-0"
                   component="div"
                 />
-                {error && <div className="text-red-500">{error.message}</div>}
+
                 <button
                   type="submit"
                   className="w-full px-4 py-2 border border-black text-white hover:text-black font-medium bg-[#000000] hover:bg-[#fff] active:bg-[#fff] rounded-lg duration-150"

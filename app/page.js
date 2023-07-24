@@ -1,6 +1,8 @@
 'use client';
 import FeaturedProducts from './layout/FeaturedProducts/FeaturedProducts';
 import ProductsCarousel from './components/ProductsCarousel/ProductsCarousel';
+import { useContext } from 'react';
+import { AuthContext } from './context/AuthContext';
 
 // const images = [
 //   {

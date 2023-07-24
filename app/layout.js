@@ -4,6 +4,7 @@ import CategoriesList from './layout/CategoriesList/CategoriesList';
 import Navbar from './components/Navbar/Navbar';
 import { SearchProvider } from './context/SearchContext.js';
 import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
 
 export const metadata = {
   title: 'Ecommerce',
@@ -17,13 +18,15 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body>
           <AuthProvider>
-            <SearchProvider>
-              <Navbar />
-              <main className="p-6 pt-4">
-                <CategoriesList />
-                {children}
-              </main>
-            </SearchProvider>
+            <CartProvider>
+              <SearchProvider>
+                <Navbar />
+                <main className="p-6 pt-4">
+                  <CategoriesList />
+                  {children}
+                </main>
+              </SearchProvider>
+            </CartProvider>
           </AuthProvider>
         </body>
       </html>

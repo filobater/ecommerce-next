@@ -9,11 +9,31 @@ import InputText from '@/app/components/Inputs/InputText';
 import { auth } from '@/app/firebase/firebaseConfig';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { AuthContext } from '@/app/context/AuthContext';
+import { message } from 'antd';
 
 const SignupPage = () => {
   const router = useRouter();
 
   const { AuthUser, user: userContext } = useContext(AuthContext);
+  // after the user make the login request
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Your are logged in',
+      onClose: () => router.push('/'),
+      duration: 0.6,
+    });
+  };
+
+  const errorAuth = () => {
+    messageApi.open({
+      type: 'error',
+      content: error.message,
+      duration: 2,
+    });
+  };
 
   const initialValues = {
     email: '',
@@ -41,14 +61,17 @@ const SignupPage = () => {
     AuthUser(user.user);
   }
 
+  if (error) {
+    errorAuth();
+  }
+
   if (userContext) {
-    // just for now until i make the cart page
-    router.push('/');
-    return <div>Redirecting home...</div>;
+    success();
   }
 
   return (
     <div className="w-full">
+      {contextHolder}
       <div className="flex-1 flex items-center justify-center">
         <div className="w-full max-w-4xl space-y-8 px-4  text-gray-600 sm:px-0">
           <div className="mt-5 space-y-2">
@@ -99,7 +122,6 @@ const SignupPage = () => {
                     />
                   </div>
                 </div>
-                {error && <div className="text-red-500">{error.message}</div>}
 
                 <button
                   type="submit"
