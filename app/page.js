@@ -1,28 +1,19 @@
 'use client';
 import FeaturedProducts from './layout/FeaturedProducts/FeaturedProducts';
-import ProductsCarousel from './components/ProductsCarousel/ProductsCarousel';
-import { useContext } from 'react';
-import { AuthContext } from './context/AuthContext';
 
-// const images = [
-//   {
-//     src: '/assets/lap.jpg',
-//     thumbSrc: '/assets/lap.jpg',
-//   },
-//   {
-//     src: '/assets/mobile.jpg',
-//     thumbSrc: '/assets/mobile.jpg',
-//   },
-//   {
-//     src: '/assets/shoes.jpg',
-//     thumbSrc: '/assets/shoes.jpg',
-//   },
-// ];
+const styleBg = {
+  backgroundImage: 'url(/assets/bg.jpg)',
+  backgroundSize: 'cover',
+  height: '90vh',
+};
 
 export default function Home() {
   return (
     <>
-      <ProductsCarousel />
+      <div style={styleBg} className="flex items-center px-14 rounded-md">
+        <h1 className="text-white font-bold text-6xl">Store</h1>
+      </div>
+
       <FeaturedProducts />
     </>
   );

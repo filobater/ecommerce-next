@@ -70,9 +70,10 @@ const ProductCard = ({ product, handleAddToCart, handleRemoveFromCart }) => {
             <p className="text-black flex items-center gap-2">
               <span className="font-semibold">{product.price}$</span>
               <span className="line-through text-gray-500 text-sm">
-                {`${Math.round(
-                  product.price / (1 - product.discountPercentage / 100)
-                )}$`}
+                {`${(
+                  product?.price /
+                  (1 - product?.discountPercentage / 100)
+                ).toFixed(2)}$`}
               </span>
             </p>
           </div>

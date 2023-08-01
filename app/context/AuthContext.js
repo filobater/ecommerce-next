@@ -6,10 +6,13 @@ import { useSignOut } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase/firebaseConfig';
 import Cookies from 'js-cookie';
 import { message } from 'antd';
+import { useRouter } from 'next/navigation';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const router = useRouter();
+
   const [user, setUser] = useState(null);
   // firebase function
   const [signOut, loading, error] = useSignOut(auth);
@@ -45,7 +48,7 @@ export const AuthProvider = ({ children }) => {
     }
     setUser(null);
     Cookies.remove('user');
-    // localStorage.clear();
+    router.push('/');
   };
 
   return (

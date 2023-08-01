@@ -79,9 +79,10 @@ const ProductDetails = ({ params }) => {
                 </span>
               </div>
               <span className="line-through text-gray-500 text-normal">
-                {`${Math.round(
-                  product?.price / (1 - product?.discountPercentage / 100)
-                )}$`}
+                {`${(
+                  product?.price /
+                  (1 - product?.discountPercentage / 100)
+                ).toFixed(2)}$`}
               </span>
               <p className="font-semibold mt-2">Available: {product?.stock}</p>
               <div className="flex gap-4">

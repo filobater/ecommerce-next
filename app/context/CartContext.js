@@ -18,6 +18,7 @@ export const CartProvider = ({ children }) => {
     productAddToCart.quantity = 1;
 
     setCart([...cart, productAddToCart]);
+    console.log(cart);
   };
 
   const handleRemoveFromCart = (productId) => {
@@ -25,11 +26,14 @@ export const CartProvider = ({ children }) => {
     setCart([...filteredCart]);
   };
 
-  console.log(cart);
-
   return (
     <CartContext.Provider
-      value={{ handleAddToCart, handleRemoveFromCart, cart, setProducts }}
+      value={{
+        handleAddToCart,
+        handleRemoveFromCart,
+        cart,
+        setProducts,
+      }}
     >
       {children}
     </CartContext.Provider>

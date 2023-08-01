@@ -67,7 +67,9 @@ const Navbar = () => {
           <FaHeart className="text-2xl text-red-600 hover:text-red-400" />
         </li>
         <li>
-          <FaCartShopping className="text-2xl text-gray-600 hover:text-black" />
+          <Link href="/cart">
+            <FaCartShopping className="text-2xl text-gray-600 hover:text-black" />
+          </Link>
         </li>
 
         {/* just for now until i make the profile page and...  */}
