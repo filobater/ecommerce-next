@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import CardCart from '../components/CardCart/CardCart';
 import { Divider } from 'antd';
@@ -11,6 +11,9 @@ const Cart = () => {
 
   return (
     <div className="p-8">
+      <h1 className="font-bold text-2xl mb-8 ">
+        Your cart: {cart.length} {cart.length > 1 ? 'items' : 'item'}
+      </h1>
       {cart.length > 0 ? (
         <>
           <ul className="flex items-center justify-between">

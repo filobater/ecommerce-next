@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Rate, InputNumber } from 'antd';
 import ThumbnailSlider from '@/app/components/ThumbnailSlider/ThumbnailSlider';
 import { useProductDetails } from '@/app/hooks/useProductDetails';
@@ -9,6 +9,8 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import ProductsList from '@/app/layout/ProductsList/ProductsList';
 import { BiCartAlt } from 'react-icons/bi';
+import { CartContext } from '@/app/context/CartContext';
+import { message } from 'antd';
 
 const ProductDetails = ({ params }) => {
   const [quantity, setQuantity] = useState(1);
@@ -18,14 +20,52 @@ const ProductDetails = ({ params }) => {
   const product = data?.data;
 
   const { data: relatedProducts } = useProductsCategory(product?.category);
+
   const filteredProducts = relatedProducts?.data?.products.filter(
     (relatedProduct) => relatedProduct.id !== product.id
   );
-  const handleAddToCartWithQuantity = () => {
-    console.log(quantity);
+
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const success = (msg) => {
+    messageApi.open({
+      type: 'success',
+      content: msg,
+      duration: 0.8,
+    });
   };
+  const warningMsg = () => {
+    messageApi.open({
+      type: 'warning',
+      content: 'Item already in the cart',
+      duration: 0.7,
+    });
+  };
+
+  const { cart, setCart } = useContext(CartContext);
+
+  const handleAddToCartWithQuantity = (id) => {
+    product.quantity = quantity;
+    const existedProduct = cart.find((product) => product.id === id);
+
+    if (existedProduct && existedProduct.quantity === quantity) {
+      warningMsg();
+    }
+    if (existedProduct && existedProduct.quantity !== quantity) {
+      existedProduct.quantity = quantity;
+      success('Item added to cart with the new quantity');
+    }
+    if (!existedProduct) {
+      setCart([...cart, product]);
+      success('Item added to cart');
+    }
+  };
+
+  console.log(cart);
+
   return (
     <>
+      {contextHolder}
       <h1 className="font-bold text-2xl mb-8">Product details</h1>
       <div className="flex lg:flex-nowrap flex-wrap gap-4 lg:justify-normal md:justify-center items-start pt-5">
         <div className="left md:basis-[55%] basis-full">
@@ -95,7 +135,7 @@ const ProductDetails = ({ params }) => {
                   onChange={(value) => setQuantity(value)}
                 />
                 <button
-                  onClick={handleAddToCartWithQuantity}
+                  onClick={() => handleAddToCartWithQuantity(product.id)}
                   className="flex p-2 px-12 gap-4 items-center bg-black  hover:shadow-xl hover:shadow-slate-800 transition-all text-white text-lg rounded-lg"
                 >
                   <BiCartAlt className="text-xl" /> Add to cart

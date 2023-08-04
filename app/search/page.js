@@ -1,11 +1,12 @@
 'use client';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { SearchContext } from '../context/SearchContext';
 import { useSearchProducts } from '../hooks/useSearchProducts';
 import { useRouter } from 'next/navigation';
 import ProductsList from '../layout/ProductsList/ProductsList';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { CartContext } from '../context/CartContext';
 
 const SearchPage = () => {
   const router = useRouter();
@@ -19,6 +20,12 @@ const SearchPage = () => {
   const { data, isLoading } = useSearchProducts(searchValue);
 
   const productsData = data?.data;
+
+  const { setProducts } = useContext(CartContext);
+
+  useEffect(() => {
+    setProducts(productsData?.products);
+  });
 
   return (
     <div>

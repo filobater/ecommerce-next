@@ -2,7 +2,6 @@
 
 'use client';
 import { useState, useEffect, createContext } from 'react';
-import { useProducts } from '../hooks/useProducts';
 
 export const CartContext = createContext();
 
@@ -16,10 +15,12 @@ export const CartProvider = ({ children }) => {
     );
 
     productAddToCart.quantity = 1;
+    productAddToCart.isInCart = true;
 
     setCart([...cart, productAddToCart]);
-    console.log(cart);
   };
+
+  console.log(cart);
 
   const handleRemoveFromCart = (productId) => {
     const filteredCart = cart.filter((product) => product.id !== productId);
@@ -33,6 +34,7 @@ export const CartProvider = ({ children }) => {
         handleRemoveFromCart,
         cart,
         setProducts,
+        setCart,
       }}
     >
       {children}

@@ -52,7 +52,13 @@ const Navbar = () => {
   return (
     <nav className="relative flex w-full sm:flex-wrap lg:flex-nowrap items-center justify-between border-b-[1px] p-2  lg:p-4 lg:pt-8 gap-4">
       <Link className="ml-2  " href="/">
-        <Image src="/assets/logo1.png" alt="logo" width={70} height={70} />
+        <Image
+          src="/assets/logo1.png"
+          alt="logo"
+          width={70}
+          height={70}
+          priority
+        />
       </Link>
       <div className="flex items-baseline flex-1">
         <Search

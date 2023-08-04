@@ -12,7 +12,7 @@ const CategoriesList = () => {
   return (
     <>
       {isLoading ? (
-        <Skeleton />
+        <Skeleton className="mb-6" />
       ) : (
         <ul className="categories flex gap-4 whitespace-nowrap overflow-auto mb-6 pb-3">
           {categories?.map((category, i) => (

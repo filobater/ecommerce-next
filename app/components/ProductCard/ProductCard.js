@@ -1,28 +1,25 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BiCartAlt, BiSolidCartAlt } from 'react-icons/bi';
 import { message } from 'antd';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { CartContext } from '@/app/context/CartContext';
 
-const ProductCard = ({ product, handleAddToCart, handleRemoveFromCart }) => {
+const ProductCard = ({ product }) => {
   const [addToCart, setAddToCart] = useState(false);
   const [addToWishlist, setAddToWishlist] = useState(false);
 
+  const { handleAddToCart, handleRemoveFromCart, cart } =
+    useContext(CartContext);
+
   const [messageApi, contextHolder] = message.useMessage();
 
-  const successAdd = () => {
+  const success = (msg) => {
     messageApi.open({
       type: 'success',
-      content: 'Item added to cart',
-      duration: 0.8,
-    });
-  };
-  const successRemove = () => {
-    messageApi.open({
-      type: 'success',
-      content: 'Item removed from cart',
+      content: msg,
       duration: 0.8,
     });
   };
@@ -31,14 +28,15 @@ const ProductCard = ({ product, handleAddToCart, handleRemoveFromCart }) => {
     if (!addToCart) {
       handleAddToCart(id);
       setAddToCart(true);
-      successAdd();
+      success('Item added to cart');
     }
     if (addToCart) {
       handleRemoveFromCart(id);
       setAddToCart(false);
-      successRemove();
+      success('Item removed from cart');
     }
   };
+
   const toggleWishlist = () => {
     setAddToWishlist(!addToWishlist);
   };
@@ -52,6 +50,8 @@ const ProductCard = ({ product, handleAddToCart, handleRemoveFromCart }) => {
           <Image
             src={product.thumbnail}
             alt={product.title}
+            placeholder="blur"
+            blurDataURL={product.thumbnail}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="aspect-square object-cover rounded-md"

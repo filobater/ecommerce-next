@@ -7,7 +7,9 @@ import InputPassword from '../components/Inputs/InputPassword';
 import Image from 'next/image';
 import { auth } from '@/app/firebase/firebaseConfig';
 import { useUpdateEmail, useUpdateProfile } from 'react-firebase-hooks/auth';
-import { message } from 'antd';
+import { Avatar, message } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+
 import { onAuthStateChanged } from 'firebase/auth';
 
 const Profile = () => {
@@ -90,13 +92,15 @@ const Profile = () => {
       </h1>
       <div className="flex mt-8 flex-col lg:flex-row gap-[7rem] justify-center ">
         <div className="flex flex-col items-center gap-2 ">
-          <Image
+          {/* <Image
             src={image.preview ? image.preview : ''}
             className="w-16 h-16 rounded-full"
             alt="profile img"
             width={100}
             height={100}
-          />
+          /> */}
+
+          <Avatar size={70} icon={<UserOutlined />} />
           <h2 className="capitalize font-bold text-2xl w-max text-gray-700">
             {userData?.displayName ? userData?.displayName : 'your name'}
           </h2>
