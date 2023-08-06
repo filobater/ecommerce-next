@@ -1,5 +1,5 @@
 'use client';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Form, Formik, ErrorMessage } from 'formik';
@@ -57,16 +57,18 @@ const SignupPage = () => {
     resetForm();
   };
 
-  if (user) {
-    AuthUser(user.user);
-  }
+  useEffect(() => {
+    if (user) {
+      success();
+    }
+
+    if (user) {
+      AuthUser(user.user);
+    }
+  }, [user]);
 
   if (error) {
     errorAuth();
-  }
-
-  if (userContext) {
-    success();
   }
 
   return (

@@ -20,7 +20,7 @@ export const CartProvider = ({ children }) => {
     setCart([...cart, productAddToCart]);
   };
 
-  console.log(cart);
+  // console.log(cart);
 
   const handleRemoveFromCart = (productId) => {
     const filteredCart = cart.filter((product) => product.id !== productId);

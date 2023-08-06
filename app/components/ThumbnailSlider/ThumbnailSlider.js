@@ -21,6 +21,8 @@ const ThumbnailSlider = ({ imgs, productName }) => {
           src={sliderData}
           width={500}
           height={500}
+          placeholder="blur"
+          blurDataURL={sliderData}
           className="mb-5 rounded-lg !h-[400px]"
           alt={`${productName ? productName : 'product image'}`}
         />

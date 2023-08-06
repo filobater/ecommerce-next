@@ -8,10 +8,13 @@ import { useContext, useEffect } from 'react';
 const FeaturedProducts = () => {
   const { data, isError, error } = useProducts();
   const products = data?.data.products;
-  const { handleAddToCart, handleRemoveFromCart, setProducts } =
-    useContext(CartContext);
+  const { setProducts } = useContext(CartContext);
   useEffect(() => {
     setProducts(products);
+
+    return () => {
+      setProducts([]);
+    };
   });
 
   return (
@@ -19,12 +22,7 @@ const FeaturedProducts = () => {
       <h2 className="font-bold text-2xl my-5">Featured Products</h2>
       <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-5 ">
         {products?.slice(8, 16).map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            handleAddToCart={handleAddToCart}
-            handleRemoveFromCart={handleRemoveFromCart}
-          />
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </div>

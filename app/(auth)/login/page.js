@@ -1,5 +1,5 @@
 'use client';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Button, Divider, message } from 'antd';
 import { Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -64,19 +64,21 @@ const LoginPage = () => {
     AuthUser(user);
   };
 
-  if (user) {
-    handleLogin(user.user);
-  }
-  if (userGoogle) {
-    handleLogin(userGoogle.user);
-  }
+  useEffect(() => {
+    if (user) {
+      success();
+    }
+
+    if (user) {
+      handleLogin(user.user);
+    }
+    if (userGoogle) {
+      handleLogin(userGoogle.user);
+    }
+  }, [user]);
 
   if (error) {
     errorAuth();
-  }
-
-  if (userContext) {
-    success();
   }
 
   return (

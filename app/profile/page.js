@@ -9,8 +9,10 @@ import { auth } from '@/app/firebase/firebaseConfig';
 import { useUpdateEmail, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { Avatar, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-
 import { onAuthStateChanged } from 'firebase/auth';
+import { useUploadFile } from 'react-firebase-hooks/storage';
+import { storage } from '@/app/firebase/firebaseConfig';
+import { ref, getDownloadURL } from 'firebase/storage';
 
 const Profile = () => {
   const [image, setImage] = useState({ preview: '', raw: '' });
@@ -47,29 +49,44 @@ const Profile = () => {
 
   const { user, AuthUser } = useContext(AuthContext);
 
-  const userData = user?.providerData[0];
+  // setting uploading function firebase
+
+  const [uploadFile, uploading, snapshot, error] = useUploadFile();
+  const storageRef = ref(storage, user?.uid + '.png');
+
+  const upload = async () => {
+    const selectedFile = image.raw;
+    if (selectedFile) {
+      await uploadFile(storageRef, selectedFile, {
+        contentType: 'image/jpeg',
+      });
+    }
+  };
 
   const initialValues = {
     email: user?.email,
-    displayName: userData?.displayName,
+    displayName: user?.displayName,
   };
 
   const updateInformation = async (updateFunc, updateFuncArgs) => {
     const successUpdateUpdateInformation = await updateFunc(updateFuncArgs);
     if (successUpdateUpdateInformation) {
       onAuthStateChanged(auth, (user) => {
-        console.log(user);
         AuthUser(user);
       });
       successUpdating();
     }
   };
 
-  const onSubmit = (values) => {
-    // const formData = new FormData();
-    // formData.append('photoURL', image.preview);
-
+  const onSubmit = async (values) => {
     const displayName = values.displayName;
+
+    if (image.raw) {
+      upload();
+      const photoURL = await getDownloadURL(storageRef);
+      updateInformation(updateProfile, { photoURL });
+    }
+
     //update profile
     if (displayName !== initialValues.displayName) {
       updateInformation(updateProfile, { displayName });
@@ -92,17 +109,20 @@ const Profile = () => {
       </h1>
       <div className="flex mt-8 flex-col lg:flex-row gap-[7rem] justify-center ">
         <div className="flex flex-col items-center gap-2 ">
-          {/* <Image
-            src={image.preview ? image.preview : ''}
-            className="w-16 h-16 rounded-full"
-            alt="profile img"
-            width={100}
-            height={100}
-          /> */}
+          {user?.photoURL && (
+            <Image
+              src={user.photoURL}
+              className="w-16 h-16 rounded-full"
+              alt="profile img"
+              width={100}
+              height={100}
+            />
+          )}
 
-          <Avatar size={70} icon={<UserOutlined />} />
+          {!user?.photoURL && <Avatar size={70} icon={<UserOutlined />} />}
+
           <h2 className="capitalize font-bold text-2xl w-max text-gray-700">
-            {userData?.displayName ? userData?.displayName : 'your name'}
+            {user?.displayName ? user?.displayName : 'your name'}
           </h2>
           <div className="flex items-center">
             <label
