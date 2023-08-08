@@ -9,10 +9,9 @@ import { CartContext } from '@/app/context/CartContext';
 
 const ProductCard = ({ product }) => {
   const [addToCart, setAddToCart] = useState(false);
-  const [addToWishlist, setAddToWishlist] = useState(false);
+  // const [addToWishlist, setAddToWishlist] = useState(false);
 
-  const { handleAddToCart, handleRemoveFromCart, cart } =
-    useContext(CartContext);
+  const { handleAddToCart, cart } = useContext(CartContext);
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -25,16 +24,7 @@ const ProductCard = ({ product }) => {
   };
 
   const toggleCart = (id) => {
-    if (!addToCart) {
-      handleAddToCart(id);
-      setAddToCart(true);
-      success('Item added to cart');
-    }
-    if (addToCart) {
-      handleRemoveFromCart(id);
-      setAddToCart(false);
-      success('Item removed from cart');
-    }
+    handleAddToCart(id);
   };
 
   const toggleWishlist = () => {
@@ -86,18 +76,18 @@ const ProductCard = ({ product }) => {
           className="bg-black p-2 rounded-md cursor-pointer"
         >
           <span className="text-white text-2xl">
-            {addToCart ? <BiSolidCartAlt /> : <BiCartAlt />}
+            <BiCartAlt />
           </span>
         </div>
       </div>
-      <div
+      {/* <div
         onClick={toggleWishlist}
         className={` transition-all opacity-0 group-hover:opacity-100 bg-white p-2 rounded-md absolute drop-shadow-lg shadow-2xl shadow-black top-0 right-4 cursor-pointer text-2xl ${
           addToWishlist ? 'text-red-500' : 'text-black'
         }`}
       >
         {addToWishlist ? <AiFillHeart /> : <AiOutlineHeart />}
-      </div>
+      </div> */}
     </div>
   );
 };

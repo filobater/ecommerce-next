@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Rate, InputNumber } from 'antd';
 import ThumbnailSlider from '@/app/components/ThumbnailSlider/ThumbnailSlider';
 import { useProductDetails } from '@/app/hooks/useProductDetails';
@@ -31,7 +31,7 @@ const ProductDetails = ({ params }) => {
     messageApi.open({
       type: 'success',
       content: msg,
-      duration: 0.8,
+      duration: 0.9,
     });
   };
   const warningMsg = () => {
@@ -42,10 +42,9 @@ const ProductDetails = ({ params }) => {
     });
   };
 
-  const { cart, setCart } = useContext(CartContext);
+  const { cart, setCart, setProducts } = useContext(CartContext);
 
   const handleAddToCartWithQuantity = (id) => {
-    product.quantity = quantity;
     const existedProduct = cart.find((product) => product.id === id);
 
     if (existedProduct && existedProduct.quantity === quantity) {
@@ -56,12 +55,13 @@ const ProductDetails = ({ params }) => {
       success('Item added to cart with the new quantity');
     }
     if (!existedProduct) {
-      setCart([...cart, product]);
+      setCart([...cart, { ...product, quantity }]);
       success('Item added to cart');
     }
   };
 
-  console.log(cart);
+
+
 
   return (
     <>

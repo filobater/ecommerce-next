@@ -2,7 +2,7 @@ import React from 'react';
 import LabelInput from './LabelInput';
 import { Field } from 'formik';
 
-const InputText = ({ label, type, name }) => {
+const InputText = ({ label, type, name, placeholder }) => {
   return (
     <div>
       <LabelInput>{label}</LabelInput>

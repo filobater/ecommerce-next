@@ -21,12 +21,6 @@ const SearchPage = () => {
 
   const productsData = data?.data;
 
-  const { setProducts } = useContext(CartContext);
-
-  useEffect(() => {
-    setProducts(productsData?.products);
-  });
-
   return (
     <div>
       {isLoading ? (

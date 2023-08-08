@@ -14,7 +14,9 @@ const CardCart = ({ product, handleRemoveFromCart }) => {
     product.quantity = quantity;
     setTotalPrice(product.price * product.quantity);
   };
-  product.totalPrice = totalPrice;
+  useEffect(() => {
+    product.totalPrice = totalPrice;
+  }, [totalPrice]);
 
   return (
     <div className=" flex justify-between  items-center border-b border-gray-300 py-8">
