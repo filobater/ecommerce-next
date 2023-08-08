@@ -2,14 +2,13 @@
 import { useState, useEffect, useContext } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { BiCartAlt, BiSolidCartAlt } from 'react-icons/bi';
+import { BiCartAlt } from 'react-icons/bi';
 import { message } from 'antd';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+
 import { CartContext } from '@/app/context/CartContext';
 
 const ProductCard = ({ product }) => {
   const [addToCart, setAddToCart] = useState(false);
-  // const [addToWishlist, setAddToWishlist] = useState(false);
 
   const { handleAddToCart, cart } = useContext(CartContext);
 
@@ -25,10 +24,6 @@ const ProductCard = ({ product }) => {
 
   const toggleCart = (id) => {
     handleAddToCart(id);
-  };
-
-  const toggleWishlist = () => {
-    setAddToWishlist(!addToWishlist);
   };
 
   return (
@@ -80,14 +75,6 @@ const ProductCard = ({ product }) => {
           </span>
         </div>
       </div>
-      {/* <div
-        onClick={toggleWishlist}
-        className={` transition-all opacity-0 group-hover:opacity-100 bg-white p-2 rounded-md absolute drop-shadow-lg shadow-2xl shadow-black top-0 right-4 cursor-pointer text-2xl ${
-          addToWishlist ? 'text-red-500' : 'text-black'
-        }`}
-      >
-        {addToWishlist ? <AiFillHeart /> : <AiOutlineHeart />}
-      </div> */}
     </div>
   );
 };

@@ -10,10 +10,13 @@ const CardCart = ({ product, handleRemoveFromCart }) => {
     product.price * product.quantity
   );
 
+  const { cart, setCart } = useContext(CartContext);
+
   const handleChangeQty = (quantity) => {
     product.quantity = quantity;
     setTotalPrice(product.price * product.quantity);
   };
+
   useEffect(() => {
     product.totalPrice = totalPrice;
   }, [totalPrice]);

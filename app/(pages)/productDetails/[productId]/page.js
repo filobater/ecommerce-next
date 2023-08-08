@@ -1,29 +1,28 @@
 'use client';
 
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { Rate, InputNumber } from 'antd';
 import ThumbnailSlider from '@/app/components/ThumbnailSlider/ThumbnailSlider';
 import { useProductDetails } from '@/app/hooks/useProductDetails';
-import { useProductsCategory } from '@/app/hooks/useProductsCategory';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import ProductsList from '@/app/layout/ProductsList/ProductsList';
 import { BiCartAlt } from 'react-icons/bi';
 import { CartContext } from '@/app/context/CartContext';
 import { message } from 'antd';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 const ProductDetails = ({ params }) => {
   const [quantity, setQuantity] = useState(1);
 
+  const [addToWishlist, setAddToWishlist] = useState(false);
+
+  const toggleWishlist = () => {
+    setAddToWishlist(!addToWishlist);
+  };
+
   const { data, isLoading } = useProductDetails(params.productId);
 
   const product = data?.data;
-
-  const { data: relatedProducts } = useProductsCategory(product?.category);
-
-  const filteredProducts = relatedProducts?.data?.products.filter(
-    (relatedProduct) => relatedProduct.id !== product.id
-  );
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -42,7 +41,7 @@ const ProductDetails = ({ params }) => {
     });
   };
 
-  const { cart, setCart, setProducts } = useContext(CartContext);
+  const { cart, setCart } = useContext(CartContext);
 
   const handleAddToCartWithQuantity = (id) => {
     const existedProduct = cart.find((product) => product.id === id);
@@ -60,13 +59,19 @@ const ProductDetails = ({ params }) => {
     }
   };
 
-
-
-
   return (
     <>
       {contextHolder}
       <h1 className="font-bold text-2xl mb-8">Product details</h1>
+      <div
+        onClick={toggleWishlist}
+        className={` bg-white p-2 w-fit rounded-md cursor-pointer text-4xl ml-auto ${
+          addToWishlist ? 'text-red-500' : 'text-black'
+        }`}
+        title="Add to wishlist"
+      >
+        {addToWishlist ? <AiFillHeart /> : <AiOutlineHeart />}
+      </div>
       <div className="flex lg:flex-nowrap flex-wrap gap-4 lg:justify-normal md:justify-center items-start pt-5">
         <div className="left md:basis-[55%] basis-full">
           {isLoading ? (
@@ -144,10 +149,6 @@ const ProductDetails = ({ params }) => {
             </div>
           )}
         </div>
-      </div>
-      <div className="mt-20" id="related-products">
-        <h2 className="font-bold text-xl mb-4">Related products</h2>
-        <ProductsList products={filteredProducts} />
       </div>
     </>
   );

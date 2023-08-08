@@ -1,12 +1,18 @@
 'use client';
 import { useContext, useEffect } from 'react';
-import { CartContext } from '../context/CartContext';
-import CardCart from '../components/CardCart/CardCart';
+import { CartContext } from '@/app/context/CartContext';
+
+import CardCart from '@/app/components/CardCart/CardCart';
 import { Divider } from 'antd';
 import Link from 'next/link';
+import Checkout from '@/app/components/Checkout/Checkout';
 
 const Cart = () => {
   const { cart, handleRemoveFromCart } = useContext(CartContext);
+
+  useEffect(() => {
+    console.log(localStorage.getItem('cart'));
+  }, [cart]);
 
   return (
     <div className="p-8">
@@ -14,8 +20,8 @@ const Cart = () => {
         Your cart: {cart.length} {cart.length > 1 ? 'items' : 'item'}
       </h1>
       {cart.length > 0 ? (
-        <div className="flex justify-between">
-          <div className="basis-[60%]">
+        <div className="flex justify-between flex-col lg:flex-row gap-12">
+          <div className="basis-[56%] ">
             <ul className="flex items-center justify-between">
               <li>Image</li>
               <li>Name</li>
@@ -33,7 +39,9 @@ const Cart = () => {
               />
             ))}
           </div>
-          <div>this is the checkout place</div>
+          <div className="flex-1">
+            <Checkout />
+          </div>
         </div>
       ) : (
         <span>

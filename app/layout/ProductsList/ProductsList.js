@@ -9,6 +9,10 @@ const ProductsList = ({ products }) => {
     if (products?.length > 0) {
       setProducts(products);
     }
+
+    return () => {
+      setProducts([]);
+    };
   });
 
   return (
