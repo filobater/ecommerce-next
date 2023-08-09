@@ -10,10 +10,6 @@ import Checkout from '@/app/components/Checkout/Checkout';
 const Cart = () => {
   const { cart, handleRemoveFromCart } = useContext(CartContext);
 
-  useEffect(() => {
-    console.log(localStorage.getItem('cart'));
-  }, [cart]);
-
   return (
     <div className="p-8">
       <h1 className="font-bold text-2xl mb-8 ">

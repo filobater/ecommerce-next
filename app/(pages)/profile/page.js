@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation';
 import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Avatar, message, Button, Modal } from 'antd';
-import InputText from '../components/Inputs/InputText';
-import { AuthContext } from '../context/AuthContext';
-import InputPassword from '../components/Inputs/InputPassword';
+import InputText from '@/app/components/Inputs/InputText';
+import InputPassword from '@/app/components/Inputs/InputPassword';
+import { AuthContext } from '@/app/context/AuthContext';
 import { auth } from '@/app/firebase/firebaseConfig';
 import {
   useUpdateEmail,

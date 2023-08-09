@@ -9,11 +9,7 @@ const ProductsList = ({ products }) => {
     if (products?.length > 0) {
       setProducts(products);
     }
-
-    return () => {
-      setProducts([]);
-    };
-  });
+  }, [products]);
 
   return (
     <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-5 ">
