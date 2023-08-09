@@ -73,7 +73,7 @@ const Navbar = () => {
           <FaHeart className="text-2xl text-red-600 hover:text-red-400" />
         </li>
         <li>
-          <Link href="/cart" ariralabel="cart">
+          <Link href="/cart" aria-label="cart">
             <FaCartShopping className="text-2xl text-gray-600 hover:text-black" />
           </Link>
         </li>
