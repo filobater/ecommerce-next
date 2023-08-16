@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
             <CartProvider>
               <SearchProvider>
                 <Navbar />
-                <main className="p-6 pt-4">
+                <main className="p-4 pt-4 md:p6">
                   <CategoriesList />
                   {children}
                 </main>

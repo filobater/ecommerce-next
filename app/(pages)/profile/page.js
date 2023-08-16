@@ -21,6 +21,7 @@ import { useUploadFile } from 'react-firebase-hooks/storage';
 import { storage } from '@/app/firebase/firebaseConfig';
 import { ref, getDownloadURL } from 'firebase/storage';
 import Cookies from 'js-cookie';
+import PageTitle from '@/app/components/PageTitle/PageTitle';
 
 const Profile = () => {
   const { user, AuthUser } = useContext(AuthContext);
@@ -156,9 +157,9 @@ const Profile = () => {
   return (
     <div className="mt-20 p-8 flex-1">
       {contextHolder}
-      <h1 className="capitalize font-bold text-3xl text-gray-700 m-auto ">
+      <PageTitle className={'capitalize  text-3xl text-gray-700 m-auto '}>
         profile
-      </h1>
+      </PageTitle>
       <div className="flex mt-8 flex-col lg:flex-row gap-[7rem] justify-center ">
         <div className="flex flex-col items-center gap-2 ">
           {user?.photoURL && (

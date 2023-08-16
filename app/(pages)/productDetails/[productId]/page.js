@@ -10,6 +10,7 @@ import { BiCartAlt } from 'react-icons/bi';
 import { CartContext } from '@/app/context/CartContext';
 import { message } from 'antd';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import PageTitle from '@/app/components/PageTitle/PageTitle';
 
 const ProductDetails = ({ params }) => {
   const [quantity, setQuantity] = useState(1);
@@ -62,7 +63,7 @@ const ProductDetails = ({ params }) => {
   return (
     <>
       {contextHolder}
-      <h1 className="font-bold text-2xl mb-8">Product details</h1>
+      <PageTitle className={'mb-8'}>Product details</PageTitle>
       <div
         onClick={toggleWishlist}
         className={` bg-white p-2 w-fit rounded-md cursor-pointer text-4xl ml-auto ${

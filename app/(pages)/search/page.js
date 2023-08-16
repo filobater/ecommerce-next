@@ -5,8 +5,9 @@ import { SearchContext } from '@/app/context/SearchContext';
 import { useSearchProducts } from '@/app/hooks/useSearchProducts';
 
 import ProductsList from '@/app/layout/ProductsList/ProductsList';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+
+import PageTitle from '@/app/components/PageTitle/PageTitle';
+import SkeletonCardList from '@/app/layout/SkeletonCardList/SkeletonCardList';
 
 const SearchPage = () => {
   const { searchValue } = useContext(SearchContext);
@@ -18,15 +19,15 @@ const SearchPage = () => {
   return (
     <div>
       {isLoading ? (
-        <Skeleton className="!w-[200px] mt-8" />
+        <SkeletonCardList />
       ) : !searchValue ? (
         <span className="font-semibold">
           Type in the search bar to see results
         </span>
       ) : (
-        <h1 className="font-bold text-2xl mb-4">{`Search result${
+        <PageTitle className={'font-bold text-2xl mb-4'}>{`Search result${
           productsData?.total > 1 ? 's' : ''
-        }: ${productsData?.total}`}</h1>
+        }: ${productsData?.total}`}</PageTitle>
       )}
       {productsData?.products.length > 0 && (
         <ProductsList products={productsData.products} />

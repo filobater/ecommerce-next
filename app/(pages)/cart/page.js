@@ -2,10 +2,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '@/app/context/CartContext';
 
-import CardCart from '@/app/components/CardCart/CardCart';
+import ItemCart from '../../components/ItemCart/ItemCart';
 import { Divider } from 'antd';
 import Link from 'next/link';
 import Checkout from '@/app/components/Checkout/Checkout';
+import PageTitle from '@/app/components/PageTitle/PageTitle';
 
 const Cart = () => {
   const { cart, handleRemoveFromCart } = useContext(CartContext);
@@ -31,24 +32,23 @@ const Cart = () => {
   }, [quantity]);
 
   return (
-    <div className="p-8">
-      <h1 className="font-bold text-2xl mb-8 ">
+    <div className="md:p-8 p-2">
+      <PageTitle className={'mb-8'}>
         Your cart: {cart.length} {cart.length > 1 ? 'items' : 'item'}
-      </h1>
+      </PageTitle>
       {cart.length > 0 ? (
         <div className="flex justify-between flex-col lg:flex-row gap-12">
           <div className="basis-[56%] ">
-            <ul className="flex items-center justify-between gap-4 ">
-              <li>Image</li>
-              <li>Name</li>
+            <ul className="flex items-center justify-between gap-4 border-b pb-8">
+              <li>Product details</li>
               <li>Price</li>
               <li>Quantity</li>
               <li>Total Price</li>
               <li>Actions</li>
             </ul>
-            <Divider />
+
             {cart.map((product) => (
-              <CardCart
+              <ItemCart
                 key={product.id}
                 product={product}
                 handleRemoveFromCart={handleRemoveFromCart}

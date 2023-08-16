@@ -50,7 +50,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="relative flex w-full sm:flex-wrap lg:flex-nowrap items-center justify-between border-b-[1px] p-2  lg:p-4 lg:pt-8 gap-4">
+    <nav className=" relative flex w-full flex-wrap md:flex-nowrap items-center justify-between border-b-[1px] p-2  lg:p-4 lg:pt-8 gap-4">
       <Link className="ml-2  " href="/">
         <Image
           src="/assets/logo1.png"
