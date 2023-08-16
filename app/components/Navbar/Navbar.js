@@ -50,8 +50,8 @@ const Navbar = () => {
   }
 
   return (
-    <nav className=" relative flex w-full flex-wrap md:flex-nowrap items-center justify-between border-b-[1px] p-2  lg:p-4 lg:pt-8 gap-4">
-      <Link className="ml-2  " href="/">
+    <nav className=" relative flex w-full flex-wrap md:flex-nowrap items-center justify-between border-b-[1px] p-3  lg:p-4 lg:pt-8 gap-4">
+      <Link className="ml-2  order-1" href="/">
         <Image
           src="/assets/logo1.png"
           alt="logo"
@@ -60,7 +60,7 @@ const Navbar = () => {
           priority
         />
       </Link>
-      <div className="flex items-baseline flex-1">
+      <div className="basis-full order-3 md:order-2">
         <Search
           placeholder="Search about any product with title or description"
           onSearch={onSearch}
@@ -68,7 +68,7 @@ const Navbar = () => {
         />
       </div>
 
-      <ul className="flex gap-3 items-center">
+      <ul className="flex gap-3 items-center md:order-3 order-2">
         <li>
           <FaHeart className="text-2xl text-red-600 hover:text-red-400" />
         </li>
