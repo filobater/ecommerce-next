@@ -2,11 +2,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '@/app/context/CartContext';
 
-import ItemCart from '../../components/ItemCart/ItemCart';
-import { Divider } from 'antd';
+import Item from '@/app/components/Item/Item';
+
 import Link from 'next/link';
 import Checkout from '@/app/components/Checkout/Checkout';
 import PageTitle from '@/app/components/PageTitle/PageTitle';
+import InformationList from '@/app/components/InformationList/InformationList';
 
 const Cart = () => {
   const { cart, handleRemoveFromCart } = useContext(CartContext);
@@ -29,29 +30,26 @@ const Cart = () => {
           .reduce((acc, cur) => acc + cur, 0)
       );
     }
-  }, [quantity]);
+  }, [quantity, cart]);
 
   return (
     <div className="md:p-8 p-2">
       <PageTitle className={'mb-8'}>
-        Your cart: {cart.length} {cart.length > 1 ? 'items' : 'item'}
+        My cart: {cart.length} {cart.length > 1 ? 'items' : 'item'}
       </PageTitle>
       {cart.length > 0 ? (
         <div className="flex justify-between flex-col lg:flex-row gap-12">
           <div className="basis-[56%] ">
-            <ul className="flex items-center justify-between gap-4 border-b pb-8">
-              <li>Product details</li>
-              <li>Price</li>
+            <InformationList>
               <li>Quantity</li>
-              <li>Total Price</li>
-              <li>Actions</li>
-            </ul>
+              <li>Total price</li>
+            </InformationList>
 
             {cart.map((product) => (
-              <ItemCart
+              <Item
                 key={product.id}
                 product={product}
-                handleRemoveFromCart={handleRemoveFromCart}
+                handleRemove={handleRemoveFromCart}
                 handleChangeQty={handleChangeQty}
               />
             ))}

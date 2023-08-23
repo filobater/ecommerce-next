@@ -11,14 +11,16 @@ import { CartContext } from '@/app/context/CartContext';
 import { message } from 'antd';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import PageTitle from '@/app/components/PageTitle/PageTitle';
+import { WishlistContext } from '@/app/context/WishlistContext';
 
 const ProductDetails = ({ params }) => {
   const [quantity, setQuantity] = useState(1);
 
-  const [addToWishlist, setAddToWishlist] = useState(false);
+  const { handleAddToWishlist } = useContext(WishlistContext);
 
-  const toggleWishlist = () => {
-    setAddToWishlist(!addToWishlist);
+  const addToWishlist = (product, id) => {
+    handleAddToWishlist(product, id);
+    // setAddToWishlist(!addToWishlist);
   };
 
   const { data, isLoading } = useProductDetails(params.productId);
@@ -65,13 +67,13 @@ const ProductDetails = ({ params }) => {
       {contextHolder}
       <PageTitle className={'mb-8'}>Product details</PageTitle>
       <div
-        onClick={toggleWishlist}
-        className={` bg-white p-2 w-fit rounded-md cursor-pointer text-4xl ml-auto ${
-          addToWishlist ? 'text-red-500' : 'text-black'
-        }`}
+        onClick={() => addToWishlist(product, product.id)}
+        className={` bg-white p-2 w-fit rounded-md cursor-pointer text-4xl ml-auto 
+         'text-black'
+        `}
         title="Add to wishlist"
       >
-        {addToWishlist ? <AiFillHeart /> : <AiOutlineHeart />}
+        {<AiOutlineHeart />}
       </div>
       <div className="flex lg:flex-nowrap flex-wrap gap-4 lg:justify-normal md:justify-center items-start pt-5">
         <div className="left md:basis-[55%] basis-full">

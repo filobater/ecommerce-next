@@ -1,10 +1,11 @@
+// this component is for the wishlist page and cart page
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { InputNumber } from 'antd';
 import Link from 'next/link';
 
-const ItemCart = ({ product, handleRemoveFromCart, handleChangeQty }) => {
+const ItemCart = ({ product, handleRemove, handleChangeQty, children }) => {
   const [totalPrice, setTotalPrice] = useState();
 
   useEffect(() => {
@@ -33,19 +34,26 @@ const ItemCart = ({ product, handleRemoveFromCart, handleChangeQty }) => {
       </div>
       <p>{product.price}$</p>
 
-      <InputNumber
-        size="large"
-        className="mt-4"
-        min={1}
-        max={product.stock}
-        defaultValue={product.quantity}
-        onChange={(qty) => handleChangeQty(qty, product.id)}
-      />
+      {product.quantity && (
+        <>
+          <InputNumber
+            size="large"
+            className="mt-4"
+            min={1}
+            max={product.stock}
+            defaultValue={product.quantity}
+            onChange={(qty) => handleChangeQty(qty, product.id)}
+          />
 
-      <p>{totalPrice}$</p>
-      <button onClick={() => handleRemoveFromCart(product.id)}>
-        <AiFillCloseCircle />
-      </button>
+          <p>{totalPrice}$</p>
+        </>
+      )}
+      <div className="flex gap-6 ">
+        {children}
+        <button onClick={() => handleRemove(product.id)}>
+          <AiFillCloseCircle />
+        </button>
+      </div>
     </div>
   );
 };

@@ -3,6 +3,7 @@
 'use client';
 import { useState, useEffect, createContext } from 'react';
 import { message } from 'antd';
+import { handleRemove } from '../utils/utils';
 
 export const CartContext = createContext();
 
@@ -40,8 +41,7 @@ export const CartProvider = ({ children }) => {
   console.log(cart);
 
   const handleRemoveFromCart = (productId) => {
-    const filteredCart = cart.filter((product) => product.id !== productId);
-    setCart([...filteredCart]);
+    handleRemove(cart, productId, setCart);
   };
 
   return (

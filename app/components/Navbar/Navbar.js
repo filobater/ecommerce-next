@@ -70,7 +70,9 @@ const Navbar = () => {
 
       <ul className="flex gap-3 items-center md:order-3 order-2">
         <li>
-          <FaHeart className="text-2xl text-red-600 hover:text-red-400" />
+          <Link href="/wishlist" aria-label="wishlist">
+            <FaHeart className="text-2xl text-red-600 hover:text-red-400" />
+          </Link>
         </li>
         <li>
           <Link href="/cart" aria-label="cart">
@@ -78,7 +80,6 @@ const Navbar = () => {
           </Link>
         </li>
 
-        {/* just for now until i make the profile page and...  */}
         {user ? (
           <div ref={optionsAvatarRef} className="relative">
             <RxAvatar
