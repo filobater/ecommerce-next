@@ -1,10 +1,10 @@
-'use client';
-import FeaturedProducts from './layout/FeaturedProducts/FeaturedProducts';
+"use client";
+import FeaturedProducts from "./layout/FeaturedProducts/FeaturedProducts";
 
 const styleBg = {
-  backgroundImage: 'url(/assets/bg1.jpg)',
-  backgroundSize: 'cover',
-  height: '90vh',
+  backgroundImage: "url(/assets/bg1.jpg)",
+  backgroundSize: "cover",
+  height: "90vh",
 };
 
 export default function Home() {

@@ -1,8 +1,8 @@
 //************ not completed yet ******************/
 
-'use client';
-import { useState, useEffect, createContext } from 'react';
-import { message } from 'antd';
+"use client";
+import { useState, useEffect, createContext } from "react";
+import { message } from "antd";
 
 export const CartContext = createContext();
 
@@ -20,24 +20,22 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  const handleAddToCart = (productId) => {
-    const productAddToCart = products.find(
-      (product) => product.id === productId
-    );
+  const handleAddToCart = (productId, product, quantity = 1) => {
+    product = !product
+      ? products.find((product) => product.id === productId)
+      : product;
 
     const existedProduct = cart.find((product) => product.id === productId);
 
     if (existedProduct) {
-      msg('warning', 'Item already in the cart');
+      msg("warning", "Item already in the cart");
     }
 
     if (!existedProduct) {
-      msg('success', 'Item added to cart');
-      setCart([...cart, { ...productAddToCart, quantity: 1, isInCart: true }]);
+      msg("success", "Item added to cart");
+      setCart([...cart, { ...product, quantity, isInCart: true }]);
     }
   };
-
-  console.log(cart);
 
   const handleRemoveFromCart = (productId) => {
     const filteredCart = cart.filter((product) => product.id !== productId);

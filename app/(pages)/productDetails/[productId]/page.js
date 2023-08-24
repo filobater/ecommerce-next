@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { useState, useContext } from 'react';
-import { Rate, InputNumber } from 'antd';
-import ThumbnailSlider from '@/app/components/ThumbnailSlider/ThumbnailSlider';
-import { useProductDetails } from '@/app/hooks/useProductDetails';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import { BiCartAlt } from 'react-icons/bi';
-import { CartContext } from '@/app/context/CartContext';
-import { message } from 'antd';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import PageTitle from '@/app/components/PageTitle/PageTitle';
+import { useState, useContext } from "react";
+import { Rate, InputNumber } from "antd";
+import ThumbnailSlider from "@/app/components/ThumbnailSlider/ThumbnailSlider";
+import { useProductDetails } from "@/app/hooks/useProductDetails";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { BiCartAlt } from "react-icons/bi";
+import { CartContext } from "@/app/context/CartContext";
+import { message } from "antd";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import PageTitle from "@/app/components/PageTitle/PageTitle";
 
 const ProductDetails = ({ params }) => {
   const [quantity, setQuantity] = useState(1);
@@ -29,15 +29,15 @@ const ProductDetails = ({ params }) => {
 
   const success = (msg) => {
     messageApi.open({
-      type: 'success',
+      type: "success",
       content: msg,
       duration: 0.9,
     });
   };
   const warningMsg = () => {
     messageApi.open({
-      type: 'warning',
-      content: 'Item already in the cart',
+      type: "warning",
+      content: "Item already in the cart",
       duration: 0.7,
     });
   };
@@ -52,22 +52,22 @@ const ProductDetails = ({ params }) => {
     }
     if (existedProduct && existedProduct.quantity !== quantity) {
       existedProduct.quantity = quantity;
-      success('Item added to cart with the new quantity');
+      success("Item added to cart with the new quantity");
     }
     if (!existedProduct) {
       setCart([...cart, { ...product, quantity }]);
-      success('Item added to cart');
+      success("Item added to cart");
     }
   };
 
   return (
     <>
       {contextHolder}
-      <PageTitle className={'mb-8'}>Product details</PageTitle>
+      <PageTitle className={"mb-8"}>Product details</PageTitle>
       <div
         onClick={toggleWishlist}
         className={` bg-white p-2 w-fit rounded-md cursor-pointer text-4xl ml-auto ${
-          addToWishlist ? 'text-red-500' : 'text-black'
+          addToWishlist ? "text-red-500" : "text-black"
         }`}
         title="Add to wishlist"
       >
@@ -109,10 +109,10 @@ const ProductDetails = ({ params }) => {
 
               <div className="text-black flex flex-col items-start gap-1 ">
                 <div className="flex gap-4 items-center">
-                  {' '}
+                  {" "}
                   <span className="font-bold text-2xl">
                     {product?.price}$
-                  </span>{' '}
+                  </span>{" "}
                   <span className="font-semibold bg-gray-950 text-white text-[14px] rounded p-1">
                     {product?.discountPercentage}%
                   </span>
