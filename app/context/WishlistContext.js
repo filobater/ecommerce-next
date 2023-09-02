@@ -16,7 +16,7 @@ export const WishlistProvider = ({ children }) => {
     messageApi.open({
       type: type,
       content: msg,
-      duration: 0.8,
+      duration: 1.5,
     });
   };
 

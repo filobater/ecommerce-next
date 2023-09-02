@@ -27,44 +27,10 @@ const ProductDetails = ({ params }) => {
 
   const product = data?.data;
 
-  const [messageApi, contextHolder] = message.useMessage();
-
-  const success = (msg) => {
-    messageApi.open({
-      type: 'success',
-      content: msg,
-      duration: 0.9,
-    });
-  };
-  const warningMsg = () => {
-    messageApi.open({
-      type: 'warning',
-      content: 'Item already in the cart',
-      duration: 0.7,
-    });
-  };
-
-  const { cart, setCart } = useContext(CartContext);
-
-  const handleAddToCartWithQuantity = (id) => {
-    const existedProduct = cart.find((product) => product.id === id);
-
-    if (existedProduct && existedProduct.quantity === quantity) {
-      warningMsg();
-    }
-    if (existedProduct && existedProduct.quantity !== quantity) {
-      existedProduct.quantity = quantity;
-      success('Item added to cart with the new quantity');
-    }
-    if (!existedProduct) {
-      setCart([...cart, { ...product, quantity }]);
-      success('Item added to cart');
-    }
-  };
+  const { cart, setCart, handleAddToCart } = useContext(CartContext);
 
   return (
     <>
-      {contextHolder}
       <PageTitle className={'mb-8'}>Product details</PageTitle>
       <div
         onClick={() => addToWishlist(product, product.id)}
@@ -138,7 +104,9 @@ const ProductDetails = ({ params }) => {
                     onChange={(value) => setQuantity(value)}
                   />
                   <button
-                    onClick={() => handleAddToCartWithQuantity(product.id)}
+                    onClick={() =>
+                      handleAddToCart(product.id, product, quantity)
+                    }
                     className=" h-[3.75rem] flex p-2 px-12 gap-4 items-center bg-black  hover:shadow-xl hover:shadow-slate-800 transition-all text-white text-lg rounded-lg"
                   >
                     <BiCartAlt className="text-xl" /> Add to cart

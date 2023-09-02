@@ -26,7 +26,9 @@ const Wishlist = () => {
           <div className=" flex gap-16 justify-center  p-8">
             {wishlist.length > 0 && (
               <div className="flex-1">
-                <InformationList />
+                <InformationList>
+                  <li>Price</li>
+                </InformationList>
                 {wishlist.map((product) => (
                   <Item
                     key={product.id}

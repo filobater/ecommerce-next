@@ -6,9 +6,7 @@ const ProductsList = ({ products }) => {
   const { setProducts } = useContext(CartContext);
 
   useEffect(() => {
-    if (products?.length > 0) {
-      setProducts(products);
-    }
+    setProducts(products || []);
   }, [products]);
 
   return (

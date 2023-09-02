@@ -3,7 +3,6 @@
 'use client';
 import { useState, useEffect, createContext } from 'react';
 import { message } from 'antd';
-import { handleRemove } from '../utils/utils';
 
 export const CartContext = createContext();
 
@@ -17,31 +16,37 @@ export const CartProvider = ({ children }) => {
     messageApi.open({
       type: type,
       content: msg,
-      duration: 0.8,
+      duration: 1.5,
     });
   };
 
-  const handleAddToCart = (productId) => {
-    const productAddToCart = products.find(
-      (product) => product.id === productId
-    );
+  const handleAddToCart = (productId, product, quantity = 1) => {
+    product = !product
+      ? products.find((product) => product.id === productId)
+      : product;
 
     const existedProduct = cart.find((product) => product.id === productId);
 
-    if (existedProduct) {
+    if (existedProduct && existedProduct.quantity === quantity) {
       msg('warning', 'Item already in the cart');
+    }
+
+    if (existedProduct && existedProduct.quantity !== quantity) {
+      existedProduct.quantity = quantity;
+      msg('success', 'Item added to cart with the new quantity');
     }
 
     if (!existedProduct) {
       msg('success', 'Item added to cart');
-      setCart([...cart, { ...productAddToCart, quantity: 1, isInCart: true }]);
+      setCart([...cart, { ...product, quantity, isInCart: true }]);
     }
   };
 
   console.log(cart);
 
   const handleRemoveFromCart = (productId) => {
-    handleRemove(cart, productId, setCart);
+    const filteredCart = cart.filter((product) => product.id !== productId);
+    setCart([...filteredCart]);
   };
 
   return (

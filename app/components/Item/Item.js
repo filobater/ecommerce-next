@@ -5,7 +5,7 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { InputNumber } from 'antd';
 import Link from 'next/link';
 
-const ItemCart = ({ product, handleRemove, handleChangeQty, children }) => {
+const Item = ({ product, handleRemove, handleChangeQty, children }) => {
   const [totalPrice, setTotalPrice] = useState();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const ItemCart = ({ product, handleRemove, handleChangeQty, children }) => {
           <p>{product.title}</p>
         </Link>
       </div>
-      <p>{product.price}$</p>
+      {!product.quantity && <p>{product.price}$</p>}
 
       {product.quantity && (
         <>
@@ -58,4 +58,4 @@ const ItemCart = ({ product, handleRemove, handleChangeQty, children }) => {
   );
 };
 
-export default ItemCart;
+export default Item;
