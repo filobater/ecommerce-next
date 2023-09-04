@@ -13,10 +13,6 @@ const Wishlist = () => {
   const { handleAddToCart } = useContext(CartContext);
   const { user } = useContext(AuthContext);
 
-  console.log(user);
-
-  console.log(wishlist);
-
   return (
     <>
       {!user ? (
