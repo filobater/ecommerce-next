@@ -20,6 +20,14 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  useEffect(() => {
+    const storedCart = localStorage.getItem('cart');
+
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, []);
+
   const handleAddToCart = (productId, product, quantity = 1) => {
     product = !product
       ? products.find((product) => product.id === productId)
@@ -39,6 +47,10 @@ export const CartProvider = ({ children }) => {
     if (!existedProduct) {
       msg('success', 'Item added to cart');
       setCart([...cart, { ...product, quantity, isInCart: true }]);
+      localStorage.setItem(
+        'cart',
+        JSON.stringify([...cart, { ...product, quantity, isInCart: true }])
+      );
     }
   };
 
@@ -47,6 +59,7 @@ export const CartProvider = ({ children }) => {
   const handleRemoveFromCart = (productId) => {
     const filteredCart = cart.filter((product) => product.id !== productId);
     setCart([...filteredCart]);
+    localStorage.setItem('cart', JSON.stringify([...filteredCart]));
   };
 
   return (

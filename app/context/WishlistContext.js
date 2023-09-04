@@ -5,12 +5,13 @@ import { message } from 'antd';
 import { AuthContext } from './AuthContext';
 import { db } from '../firebase/firebaseConfig';
 
-import { collection, onSnapshot, setDoc, doc } from 'firebase/firestore';
+import { setDoc, doc, getDoc } from 'firebase/firestore';
 
 export const WishlistContext = createContext();
 
 export const WishlistProvider = ({ children }) => {
   const [wishlist, setWishlist] = useState([]);
+  const [loadingWishlist, setLoadingWishlist] = useState(true);
   const [messageApi, contextHolder] = message.useMessage();
 
   const { user } = useContext(AuthContext);
@@ -23,46 +24,46 @@ export const WishlistProvider = ({ children }) => {
     });
   };
 
-  const collectionRef = collection(db, user?.uid + 'products');
-
   const handleAddData = () => {
     if (user?.uid) {
       setDoc(doc(db, user.uid + 'products', 'wishlist'), {
-        products: wishlist.length > 0 && wishlist,
+        products: wishlist || [],
       })
         .then(() => console.log('data added'))
         .catch((err) => console.log(err));
     }
   };
 
-  // const getData = () => {
-  //   try {
-  //     onSnapshot(collectionRef, (data) => {
-  //       console.log(
-  //         data.docs.map((doc) => {
-  //           return doc.data().products;
-  //         })
-  //       );
-  //       // data.docs.map((doc) => {
-  //       //   if (doc.data().products.length > 0) {
-  //       //     setWishlist(doc.data().products);
-  //       //   }
-  //       // });
-  //     });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
+  const getData = async () => {
+    const docRef = doc(db, user.uid + 'products', 'wishlist');
 
-  //   // console.log(wishlist);
-  // };
+    const docSnap = await getDoc(docRef);
+
+    try {
+      if (docSnap.exists()) {
+        setWishlist(docSnap.data().products);
+        // console.log('Document data:', docSnap.data().products);
+      } else {
+        // docSnap.data() will be undefined in this case
+        setWishlist([]);
+        // console.log('No such document!');
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoadingWishlist(false);
+    }
+  };
 
   useEffect(() => {
     handleAddData();
   }, [wishlist]);
 
-  // useEffect(() => {
-  //   getData();
-  // });
+  useEffect(() => {
+    if (user?.uid) {
+      getData();
+    }
+  }, [user]);
 
   const handleAddToWishlist = (product, productId) => {
     if (user) {
@@ -93,7 +94,12 @@ export const WishlistProvider = ({ children }) => {
 
   return (
     <WishlistContext.Provider
-      value={{ handleAddToWishlist, wishlist, handleRemoveFromWishlist }}
+      value={{
+        handleAddToWishlist,
+        wishlist,
+        handleRemoveFromWishlist,
+        loadingWishlist,
+      }}
     >
       {contextHolder}
       {children}

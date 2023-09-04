@@ -20,6 +20,7 @@ const Cart = () => {
     product.quantity = quantity;
     setQuantity(quantity);
     product.totalPrice = product.quantity * product.price;
+    localStorage.setItem('cart', JSON.stringify(cart));
   };
 
   useEffect(() => {
