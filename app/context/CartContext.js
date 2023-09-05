@@ -1,5 +1,3 @@
-//************ not completed yet ******************/
-
 'use client';
 import { useState, useEffect, createContext } from 'react';
 import { message } from 'antd';

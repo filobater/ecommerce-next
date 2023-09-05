@@ -51,7 +51,10 @@ const Item = ({ product, handleRemove, handleChangeQty, children }) => {
       )}
       <div className="flex gap-6 ">
         {children}
-        <button onClick={() => handleRemove(product.id)}>
+        <button
+          aria-label="remove-product"
+          onClick={() => handleRemove(product.id)}
+        >
           <AiFillCloseCircle />
         </button>
       </div>

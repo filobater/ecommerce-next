@@ -20,7 +20,10 @@ const CategoriesList = () => {
       ) : (
         <ul className="categories flex gap-4 whitespace-nowrap overflow-auto mb-6 pb-3">
           {categories?.map((category) => (
-            <li key={category}>
+            <li
+              key={category}
+              className=" text-slate-600 hover:text-black hover:-mt-[3px] duration-200"
+            >
               <Link
                 className={category === pathNameCategory ? 'font-semibold' : ''}
                 href={`/categories/${category}`}

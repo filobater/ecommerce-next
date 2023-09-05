@@ -7,7 +7,9 @@ import SkeletonCardList from '../SkeletonCardList/SkeletonCardList';
 
 const FeaturedProducts = () => {
   const { data, isError, error, isLoading } = useProducts();
-  const products = data?.data.products;
+  const products = data?.data.products.slice(6, 14);
+
+  console.log(products);
 
   return (
     <div id="featured-products">

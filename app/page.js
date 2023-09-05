@@ -2,7 +2,7 @@
 import FeaturedProducts from './layout/FeaturedProducts/FeaturedProducts';
 
 const styleBg = {
-  backgroundImage: 'url(/assets/bg1.jpg)',
+  backgroundImage: 'url(/assets/bg1-min.jpg)',
   backgroundSize: 'cover',
   height: '90vh',
 };

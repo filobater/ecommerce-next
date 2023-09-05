@@ -40,6 +40,7 @@ const Wishlist = () => {
                     handleRemove={handleRemoveFromWishlist}
                   >
                     <button
+                      aria-label="add-product-cart"
                       onClick={() => handleAddToCart(product.id, product)}
                     >
                       <AiOutlineShoppingCart className="text-2xl" />

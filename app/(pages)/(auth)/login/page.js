@@ -18,8 +18,9 @@ import {
 
 const LoginPage = () => {
   const router = useRouter();
-  // message success when he logged in
+
   const [messageApi, contextHolder] = message.useMessage();
+
   const success = () => {
     messageApi.open({
       type: 'success',
@@ -37,7 +38,7 @@ const LoginPage = () => {
     });
   };
 
-  const { AuthUser, user: userContext } = useContext(AuthContext);
+  const { AuthUser } = useContext(AuthContext);
 
   const initialValues = {
     email: '',
@@ -65,7 +66,7 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    if (user) {
+    if (user || userGoogle) {
       success();
     }
 
@@ -75,7 +76,7 @@ const LoginPage = () => {
     if (userGoogle) {
       handleLogin(userGoogle.user);
     }
-  }, [user]);
+  }, [user, userGoogle]);
 
   if (error) {
     errorAuth();

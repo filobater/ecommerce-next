@@ -50,7 +50,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className=" relative flex w-full flex-wrap md:flex-nowrap items-center justify-between border-b-[1px] p-3  lg:p-4 lg:pt-8 gap-4">
+    <nav className="2xl:container 2xl:m-auto relative flex w-full flex-wrap md:flex-nowrap items-center justify-between border-b p-3 lg:p-4 lg:pt-8 gap-4">
       <Link className="ml-2  order-1" href="/">
         <Image
           src="/assets/logo1.png"
@@ -68,18 +68,19 @@ const Navbar = () => {
         />
       </div>
 
-      <ul className="flex gap-3 items-center md:order-3 order-2">
-        <li>
-          <Link href="/wishlist" aria-label="wishlist">
-            <FaHeart className="text-2xl text-red-600 hover:text-red-400" />
-          </Link>
-        </li>
-        <li>
-          <Link href="/cart" aria-label="cart">
-            <FaCartShopping className="text-2xl text-gray-600 hover:text-black" />
-          </Link>
-        </li>
-
+      <div className="flex gap-3 items-center md:order-3 order-2">
+        <ul className="flex gap-3 items-center ">
+          <li>
+            <Link href="/wishlist" aria-label="wishlist">
+              <FaHeart className="text-2xl text-red-600 hover:text-red-400" />
+            </Link>
+          </li>
+          <li>
+            <Link href="/cart" aria-label="cart">
+              <FaCartShopping className="text-2xl text-gray-600 hover:text-black" />
+            </Link>
+          </li>
+        </ul>
         {user ? (
           <div ref={optionsAvatarRef} className="relative">
             <RxAvatar
@@ -108,13 +109,13 @@ const Navbar = () => {
             </div>
           </div>
         ) : (
-          <li>
+          <div>
             <Link href="/login" title="login">
               <GiEntryDoor className="text-2xl text-gray-600 hover:text-black" />
             </Link>
-          </li>
+          </div>
         )}
-      </ul>
+      </div>
     </nav>
   );
 };

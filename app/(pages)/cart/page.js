@@ -65,6 +65,12 @@ const Cart = () => {
           </div>
           <div className="flex-1">
             <Checkout totalPrice={totalPriceAll} />
+            <div className="text-red-800 text-center mt-4">
+              <p>
+                to test the payment <br /> use 4242 4242 4242 4242, any future
+                date and any three numbers
+              </p>
+            </div>
           </div>
         </div>
       ) : (

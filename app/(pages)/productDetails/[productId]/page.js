@@ -41,7 +41,7 @@ const ProductDetails = ({ params }) => {
       >
         {<AiOutlineHeart />}
       </div>
-      <div className="flex lg:flex-nowrap flex-wrap gap-4 lg:justify-normal md:justify-center items-start pt-5">
+      <div className="flex lg:flex-nowrap flex-wrap gap-8 lg:justify-normal md:justify-center items-start pt-5">
         <div className="left md:basis-[55%] basis-full">
           {isLoading ? (
             <Skeleton className="aspect-square " />
@@ -58,8 +58,8 @@ const ProductDetails = ({ params }) => {
             <Skeleton count={8} className="md:w-[70%] w-[100%]" />
           ) : (
             <>
-              <h2 className="font-bold text-3xl mb-2">{product?.title}</h2>
-              <p className="text-gray-400 md:w-[75%] w-full mb-3 ">
+              <h2 className="font-bold text-3xl mb-3">{product?.title}</h2>
+              <p className="text-gray-600 md:w-[75%] w-full mb-3 ">
                 {product?.description}
               </p>
 
@@ -102,6 +102,7 @@ const ProductDetails = ({ params }) => {
                     max={product.stock}
                     defaultValue={1}
                     onChange={(value) => setQuantity(value)}
+                    aria-label="Quantity"
                   />
                   <button
                     onClick={() =>
