@@ -30,7 +30,7 @@ export const WishlistProvider = ({ children }) => {
         products: wishlist || [],
       })
         .then(() => console.log('data added'))
-        .catch((err) => console.log(err));
+        .catch((err) => alert(err));
     }
   };
 
@@ -42,11 +42,8 @@ export const WishlistProvider = ({ children }) => {
     try {
       if (docSnap.exists()) {
         setWishlist(docSnap.data().products);
-        // console.log('Document data:', docSnap.data().products);
       } else {
-        // docSnap.data() will be undefined in this case
         setWishlist([]);
-        // console.log('No such document!');
       }
     } catch (err) {
       console.log(err);

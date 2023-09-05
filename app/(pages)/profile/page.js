@@ -248,7 +248,7 @@ const Profile = () => {
         </Formik>
       </div>
 
-      <div className="flex justify-end">
+      <div className="flex justify-end mt-16">
         <Button type="primary" danger size="large" onClick={showModal}>
           Delete profile
         </Button>

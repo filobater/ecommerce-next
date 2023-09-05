@@ -52,8 +52,6 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  console.log(cart);
-
   const handleRemoveFromCart = (productId) => {
     const filteredCart = cart.filter((product) => product.id !== productId);
     setCart([...filteredCart]);
