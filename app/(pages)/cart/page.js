@@ -15,12 +15,20 @@ const Cart = () => {
   const [quantity, setQuantity] = useState();
   const [totalPriceAll, setTotalPriceAll] = useState();
 
-  const handleChangeQty = (quantity, productId) => {
-    const product = cart.find((product) => product.id === productId);
+  const handleQty = (quantity = 1, product, setQuantity) => {
     product.quantity = quantity;
     setQuantity(quantity);
     product.totalPrice = product.quantity * product.price;
     localStorage.setItem('cart', JSON.stringify(cart));
+  };
+
+  const handleChangeQty = (quantity = 1, productId) => {
+    const product = cart.find((product) => product.id === productId);
+    if (!quantity) {
+      handleQty(1, product, setQuantity);
+    } else {
+      handleQty(quantity, product, setQuantity);
+    }
   };
 
   useEffect(() => {

@@ -27,7 +27,7 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="bg-white group rounded-xl border p-3 space-y-4 relative group">
+    <div className="bg-white group rounded-xl border p-3 space-y-4 relative duration-200 hover:shadow-lg hover:shadow-slate-600">
       {contextHolder}
       <Link href={`/productDetails/${product.id}`}>
         {/* Image & actions */}

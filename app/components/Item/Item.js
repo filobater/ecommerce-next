@@ -14,7 +14,7 @@ const Item = ({ product, handleRemove, handleChangeQty, children }) => {
   }, [product.totalPrice]);
 
   return (
-    <div className=" flex justify-between  items-baseline border-b border-gray-300 py-8 gap-5">
+    <div className="shadow-md hover:shadow-slate-400 hover:shadow-lg duration-200 rounded p-4 my-8  flex justify-between  items-baseline border-b border-gray-300 gap-5">
       <div className="flex flex-col justify-center gap-3">
         <Image
           src={product.thumbnail}
@@ -42,6 +42,7 @@ const Item = ({ product, handleRemove, handleChangeQty, children }) => {
             min={1}
             max={product.stock}
             defaultValue={product.quantity}
+            value={product.quantity}
             onChange={(qty) => handleChangeQty(qty, product.id)}
           />
 

@@ -39,7 +39,9 @@ const Wishlist = () => {
                     product={product}
                     handleRemove={handleRemoveFromWishlist}
                   >
-                    <button onClick={() => handleAddToCart(product.id)}>
+                    <button
+                      onClick={() => handleAddToCart(product.id, product)}
+                    >
                       <AiOutlineShoppingCart className="text-2xl" />
                     </button>
                   </Item>
