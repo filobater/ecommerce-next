@@ -28,9 +28,25 @@ const ProductDetails = ({ params }) => {
   const product = data?.data;
 
   const { cart, setCart, handleAddToCart } = useContext(CartContext);
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const msg = (type, msg) => {
+    messageApi.open({
+      type: type,
+      content: msg,
+      duration: 1.5,
+    });
+  };
+
+  const addToCart = (id, product, quantity = 1) => {
+    if (!quantity) {
+      msg('warning', 'Please put a number to add to cart');
+    } else handleAddToCart(id, product, quantity);
+  };
 
   return (
     <>
+      {contextHolder}
       <PageTitle className={'mb-8'}>Product details</PageTitle>
       <div
         onClick={() => addToWishlist(product, product.id)}
@@ -103,11 +119,10 @@ const ProductDetails = ({ params }) => {
                     defaultValue={1}
                     onChange={(value) => setQuantity(value)}
                     aria-label="Quantity"
+                    value={quantity}
                   />
                   <button
-                    onClick={() =>
-                      handleAddToCart(product.id, product, quantity)
-                    }
+                    onClick={() => addToCart(product.id, product, quantity)}
                     className=" h-[3.75rem] flex p-2 px-12 gap-4 items-center bg-black  hover:shadow-xl hover:shadow-slate-800 transition-all text-white text-lg rounded-lg"
                   >
                     <BiCartAlt className="text-xl" /> Add to cart
