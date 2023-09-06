@@ -5,13 +5,13 @@ export default function middleware(req) {
   const url = req.url;
 
   if (verify && url.includes('/signup')) {
-    return NextResponse.redirect('http://localhost:3000/');
+    return NextResponse.redirect('https://ecommerce-next-ecru.vercel.app/');
   }
 
   if (verify && url.includes('/login')) {
-    return NextResponse.redirect('http://localhost:3000/');
+    return NextResponse.redirect('https://ecommerce-next-ecru.vercel.app/');
   }
   if (!verify && url.includes('/profile')) {
-    return NextResponse.redirect('http://localhost:3000/');
+    return NextResponse.redirect('https://ecommerce-next-ecru.vercel.app/');
   }
 }
