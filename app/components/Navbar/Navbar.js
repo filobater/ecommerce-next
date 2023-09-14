@@ -24,8 +24,8 @@ const Navbar = () => {
   const { Search } = Input;
 
   const onSearch = (value) => {
-    if (value && value !== '') {
-      setSearchValue(value);
+    if (value.trim().length > 0) {
+      setSearchValue(value.trim());
       router.push('/search');
     }
   };
