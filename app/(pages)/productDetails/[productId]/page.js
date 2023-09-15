@@ -39,8 +39,8 @@ const ProductDetails = ({ params }) => {
   };
 
   const addToCart = (id, product, quantity = 1) => {
-    if (!quantity) {
-      msg('warning', 'Please put a number to add to cart');
+    if (!quantity || quantity < 0) {
+      msg('warning', 'Please put a positive number to add to cart');
     } else handleAddToCart(id, product, quantity);
   };
 
@@ -114,7 +114,6 @@ const ProductDetails = ({ params }) => {
                   <InputNumber
                     size="large"
                     className="mt-4"
-                    min={1}
                     max={product.stock}
                     defaultValue={1}
                     onChange={(value) => setQuantity(value)}
